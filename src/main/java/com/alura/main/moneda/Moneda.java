@@ -2,6 +2,8 @@ package com.alura.main.moneda;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Scanner;
+
 public class Moneda {
 
     private String codeBase;
@@ -10,16 +12,18 @@ public class Moneda {
 
     private double conversionResult;
 
-    public Moneda(String codeBase, String targetBase, double conversionResult) {
-        this.codeBase = codeBase;
-        this.targetBase = targetBase;
-        this.conversionResult = conversionResult;
-    }
+    private double amount;
 
-    public Moneda(MonedaRecord monedaRecord){
+    private Scanner scanner = new Scanner(System.in);
+
+    public Moneda(){
+
+    }
+    public Moneda(MonedaRecord monedaRecord, double amount){
         this.codeBase = monedaRecord.base_code();
         this.targetBase = monedaRecord.target_code();
         this.conversionResult = Double.valueOf(monedaRecord.conversion_result());
+        this.amount = amount;
     }
 
     public String getTargetBase() {
@@ -46,12 +50,14 @@ public class Moneda {
         this.codeBase = codeBase;
     }
 
+
+    public double getAmount(){
+        System.out.println("Ingrese el valor que deseas convertir: ");
+        return scanner.nextDouble();
+    }
+
     @Override
     public String toString() {
-        return "Moneda{" +
-                "codeBase='" + codeBase + '\'' +
-                ", targetBase='" + targetBase + '\'' +
-                ", conversionResult='" + conversionResult + '\'' +
-                '}';
+        return "El valor "+amount+"["+codeBase+"] "+"corresponde al valor final de =>>> "+conversionResult+" ["+targetBase+"]";
     }
 }
